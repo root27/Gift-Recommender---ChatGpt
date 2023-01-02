@@ -4,7 +4,9 @@ Using the [ChatGpt](openai.com) model to generate gift recommendations for a use
 
 ## Features to be added
 
-- [ ] Add a mobile interface to interact with the model
+- [X] Add a mobile interface to interact with the model
+- [X] Add ChatGpt api to the backend
+- [ ] Add image search for every gift idea
 
 
 

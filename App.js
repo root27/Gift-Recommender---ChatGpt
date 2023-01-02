@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Pressable, SafeAreaView, StyleSheet, Text, TextInput, View,ActivityIndicator ,Alert} from 'react-native';
 import React,{useState} from 'react';
 
 export default function App() {
@@ -9,6 +9,77 @@ export default function App() {
   const [priceMin,setPriceMin] = useState("");
   const [priceMax,setPriceMax] = useState("");
   const [hobbies,setHobbies] = useState("");
+
+  const [loading, setLoading] = useState(false);
+
+  const [result, setResult] = useState('');
+
+
+  const onSubmit = async () => {
+    if (loading) {
+      return;
+    }
+    setLoading(true);
+    setResult('');
+    try {
+      const response = await fetch(`http://localhost:8000/generate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ priceMin, priceMax, gender, age, hobbies }),
+      });
+      const data = await response.json();
+      setResult(data.result);
+    } catch (e) {
+      Alert.alert("Couldn't generate ideas", e.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+
+if(loading){
+  return (
+    <SafeAreaView style={{flex:1}}>
+      <View style={{
+        flex:1,
+        justifyContent:"center",
+      }}>
+        <ActivityIndicator size="large" color="#10a37f" />
+      </View>
+    </SafeAreaView>
+
+
+  )
+  }
+
+  if(result){
+    return(
+      <SafeAreaView style={{flex:1}}>
+      <View style={styles.container}>
+        <View style={{alignItems:"center"}}>
+
+          <Text style={styles.header}>Here are your ideas</Text>
+        </View>
+        <Text style={{
+          
+          margin:10,
+        }}>{result}</Text>
+        <View style={{
+          alignItems:"center",
+        }}
+        >
+          <Pressable style={{backgroundColor:"#10a37f", padding:10, borderRadius:10,marginTop:50}} onPress={onSubmit}>
+            <Text style={{color:"white"}}>Generate again</Text>
+          </Pressable>
+
+          </View>
+      </View>
+    </SafeAreaView>
+    )
+  }
 
 
 
@@ -44,7 +115,7 @@ export default function App() {
           <TextInput style={styles.ageInput} placeholder="Enter hobbies" onChangeText={text => setHobbies(text)} value={hobbies} />
         </View>
         <View style={styles.button}>
-          <Pressable style={{backgroundColor:"#10a37f", padding:10, borderRadius:10, margin:10}} onPress={() => console.log("pressed")}>
+          <Pressable style={{backgroundColor:"#10a37f", padding:10, borderRadius:10, margin:10}} onPress={onSubmit}>
             <Text style={{color:"white", textAlign:"center"}}>Generate ideas</Text>
           </Pressable>
         </View>
