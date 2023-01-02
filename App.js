@@ -71,7 +71,7 @@ if(loading){
           alignItems:"center",
         }}
         >
-          <Pressable style={{backgroundColor:"#10a37f", padding:10, borderRadius:10,marginTop:50}} onPress={onSubmit}>
+          <Pressable style={{backgroundColor:"#10a37f", padding:10, borderRadius:10,marginTop:50}} onPress={() => setResult("")}>
             <Text style={{color:"white"}}>Generate again</Text>
           </Pressable>
 
