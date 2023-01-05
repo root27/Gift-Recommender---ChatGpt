@@ -61,7 +61,7 @@ if(loading){
       <View style={styles.container}>
         <View style={{alignItems:"center"}}>
 
-          <Text style={styles.header}>Here are your ideas</Text>
+          <Text style={styles.header}>Here are gift ideas 🎁 </Text>
         </View>
         <Text style={{
           
@@ -87,7 +87,7 @@ if(loading){
     <SafeAreaView style={{flex:1}}>
       <View style={styles.container}>
         <View style={{alignItems:"center"}}>
-          <Text style={styles.header}>Welcome to the gift generator 🎁  </Text>
+          <Text style={styles.header}>Welcome to the Gift Recommender 🎁  </Text>
         </View>
         <View style={styles.gender}>
           
