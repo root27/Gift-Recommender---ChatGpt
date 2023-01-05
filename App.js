@@ -122,12 +122,6 @@ if(loading){
 
         
 
-
-
-
-
-
-
         <StatusBar style="auto" />
       </View>
     </SafeAreaView>
